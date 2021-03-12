@@ -12,11 +12,19 @@ This is accompany code and data associated with the paper submission 'Hierarchic
   numpy (tested on 1.15.0) <br />
   
 ## File structure
-  ./nuclei_data/      textual data of nuclei <br />
-  ./nuclei_data/nuclei_cpaaa_RL   nuclei that used for HDRL training <br />
+  ./nuclei_data/: textual data of nuclei <br />
+  ./nuclei_data/nuclei_cpaaa_RL: nuclei that used for HDRL training <br />
+  ./dqn_eval_net_pretrained.pkl: checkpoint of the trained lower-level DQN <br />
+  ./motion_model.pkl: checkpoint of the trained Motion Model <br />
+  ./neighbor_model_800k_train.p: checkpoint of the trained Neighbor Relationship Model <br />
+  ./Embryo.py: functions for parsing the embryo data
+  ./draw_plane.py: visualization
+  ./model.py: agent-based model
+  ./run.py: simulation running
 
 ## Usage
-
+1. Explore the successful scenarios: python3 run_dqn.py <br />
 
 ## Citation
-  
+add after paper submitted to biorxiv.
+
