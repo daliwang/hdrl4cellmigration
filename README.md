@@ -12,7 +12,8 @@ This is accompany code and data associated with the paper submission 'Hierarchic
   numpy (tested on 1.15.0) <br />
   
 ## File structure
-  ./
+  ./nuclei_data/      textual data of nuclei
+  ./nuclei_data/nuclei_cpaaa_RL   nuclei that used for HDRL training
 
 ## Usage
 
