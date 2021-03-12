@@ -4,7 +4,7 @@
 This is accompany code and data associated with the paper submission 'Hierarchical deep reinforcement learning reveals novel mechanism of cell movement'.
 
 ## Package requirements
-  Python3 \\
+  Python3 <br />
   PyTorch 0.2 (tested on 0.2.0_3)
   Mesa
   PIL 4.2.1
