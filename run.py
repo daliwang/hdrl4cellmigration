@@ -133,8 +133,8 @@ class DQN(object):
 
 dqn = DQN()
 
-dqn.eval_net.load_state_dict(torch.load('dqn_eval_net_pretrained.pkl', map_location=lambda storage, loc: storage))
-dqn.target_net.load_state_dict(torch.load('dqn_eval_net_pretrained.pkl', map_location=lambda storage, loc: storage))
+dqn.eval_net.load_state_dict(torch.load('./trained_models/hdrl_llmodel.pkl', map_location=lambda storage, loc: storage))
+dqn.target_net.load_state_dict(torch.load('./trained_models/hdrl_llmodel.pkl', map_location=lambda storage, loc: storage))
 
 
 overall_step = 0

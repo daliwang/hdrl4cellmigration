@@ -56,7 +56,7 @@ RADIUS_SCALE_FACTOR = 1.0
 
 AI_CELL_SPEED_PER_MIN = 2
 
-NEIGHBOR_MODEL_PATH = './neighbor_model_800k_train.p'
+NEIGHBOR_MODEL_PATH = './trained_models/neighbor_model.p'
 
 NEIGHBOR_CANDIDATE_1 = [['ABarppppa', 'ABarppapp'], ['ABarpppap', 'ABarppapp'],['ABarppppa', 'ABarppapp', 'ABarpppap']]
 
@@ -106,13 +106,13 @@ class AlexNet(nn.Module):
 class SeqRosModel(Model):
 	def __init__(self):
 		self.speed_model = AlexNet().cuda()
-		self.speed_model.load_state_dict(torch.load('./motion_model.pkl'))
-		# self.speed_model.load_state_dict(torch.load('./motion_model.pkl', map_location=lambda storage, loc: storage))
-		self.file_path = './nuclei_data/nuclei_cpaaa_RL/t%03d-nuclei'
+		self.speed_model.load_state_dict(torch.load('./trained_models/motion_model.pkl'))
+		# self.speed_model.load_state_dict(torch.load('./trained_models/motion_model.pkl', map_location=lambda storage, loc: storage))
+		self.file_path = './data/cpaaa_0/t%03d-nuclei'
 		self.start_point = 168
 		self.end_point = 197
 		print('Parsing the Embryo...')
-		self.embryo = Embryo('./nuclei_data/nuclei_cpaaa_RL/')
+		self.embryo = Embryo('./data/cpaaa_0/')
 		self.embryo.read_data()
 		self.embryo.get_embryo_visual_params()
 		self.embryo.store_ai_cell_observed_locations(start=self.start_point)
