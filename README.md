@@ -11,5 +11,11 @@ This is accompany code and data associated with the paper submission 'Hierarchic
   scikit-learn 0.19.1 <br />
   numpy (tested on 1.15.0) <br />
   
-  
+## File structure
+  ./
+
+## Usage
+
+
+## Citation
   
