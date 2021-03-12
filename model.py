@@ -21,8 +21,6 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch.autograd import Variable
 import torch.utils.data as utils
-import torchvision
-from torchvision import transforms
 
 RUN_LEARNING = True
 
@@ -110,11 +108,11 @@ class SeqRosModel(Model):
 		self.speed_model = AlexNet().cuda()
 		self.speed_model.load_state_dict(torch.load('./motion_model.pkl'))
 		# self.speed_model.load_state_dict(torch.load('./motion_model.pkl', map_location=lambda storage, loc: storage))
-		self.file_path = './nuclei_cpaaa_RL/t%03d-nuclei'
+		self.file_path = './nuclei_data/nuclei_cpaaa_RL/t%03d-nuclei'
 		self.start_point = 168
 		self.end_point = 197
 		print('Parsing the Embryo...')
-		self.embryo = Embryo('./nuclei_cpaaa_RL/')
+		self.embryo = Embryo('./nuclei_data/nuclei_cpaaa_RL/')
 		self.embryo.read_data()
 		self.embryo.get_embryo_visual_params()
 		self.embryo.store_ai_cell_observed_locations(start=self.start_point)
