@@ -105,9 +105,9 @@ class AlexNet(nn.Module):
 
 class SeqRosModel(Model):
 	def __init__(self):
-		self.speed_model = AlexNet().cuda()
-		self.speed_model.load_state_dict(torch.load('./trained_models/motion_model.pkl'))
-		# self.speed_model.load_state_dict(torch.load('./trained_models/motion_model.pkl', map_location=lambda storage, loc: storage))
+		self.motion_model = AlexNet().cuda()
+		self.motion_model.load_state_dict(torch.load('./trained_models/motion_model.pkl'))
+		# self.motion_model.load_state_dict(torch.load('./trained_models/motion_model.pkl', map_location=lambda storage, loc: storage))
 		self.file_path = './data/cpaaa_0/t%03d-nuclei'
 		self.start_point = 168
 		self.end_point = 197
@@ -474,7 +474,7 @@ class SeqRosModel(Model):
 				s = np.concatenate((s, image_np), axis=0)
 		return s
 
-	def get_img_speed_model(self):
+	def get_img_motion_model(self):
 		img_resolution = 128
 		for cell in self.schedule.agents:
 			if cell.cell_name == self.ai_cell:
@@ -511,7 +511,7 @@ class SeqRosModel(Model):
 		LongTensor = torch.cuda.LongTensor
 		image = Variable(torch.from_numpy(image).type(FloatTensor))
 
-		pred = self.speed_model(image)
+		pred = self.motion_model(image)
 		pred = pred.data.cpu().numpy()
 		result = np.argmax(pred, axis=1)[0]
 
@@ -526,7 +526,7 @@ class SeqRosModel(Model):
 		ai2bdr_dist = self.dist_point_ellipse(ai_location[0:2])
 		ai_radius = self.get_radius(self.ai_cell)
 
-		movement_type = self.get_img_speed_model()
+		movement_type = self.get_img_motion_model()
 		if movement_type == 1:
 			self.movement_types.append(1)
 			r += 1
