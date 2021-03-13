@@ -14,7 +14,8 @@ This is accompany code and data associated with the paper submission 'Hierarchic
 ## File structure
   ./data/: folder with textual data of nuclei <br />
   ./data/Cpaaa_0: embryonic data for Cpaaa migration training and evaluation. <br />
-  ./data/Cpaaa_[1-4]:
+  ./data/Cpaaa_[1-4]: embryonic data for Cpaaa test case. <br />
+  ./data/mu_int_R_CANL_[1-2]: embryonic data for mu_int_R and CANL case. <br />
   ./trained_models/:folder with all the pre-trained models <br />
   ./trained_models/dqn_eval_net_pretrained.pkl: checkpoint of the trained lower-level DQN <br />
   ./trained_models/motion_model.pkl: checkpoint of the trained Motion Model <br />
