@@ -12,8 +12,9 @@ This is accompany code and data associated with the paper submission 'Hierarchic
   numpy (tested on 1.15.0) <br />
   
 ## File structure
-  ./nuclei_data/: folder with textual data of nuclei <br />
-  ./nuclei_data/nuclei_cpaaa_RL: nuclei that used for HDRL training <br />
+  ./data/: folder with textual data of nuclei <br />
+  ./data/Cpaaa_0: embryonic data for Cpaaa migration training and evaluation. <br />
+  ./data/Cpaaa_[1-4]:
   ./trained_models/:folder with all the pre-trained models <br />
   ./trained_models/dqn_eval_net_pretrained.pkl: checkpoint of the trained lower-level DQN <br />
   ./trained_models/motion_model.pkl: checkpoint of the trained Motion Model <br />
@@ -25,6 +26,10 @@ This is accompany code and data associated with the paper submission 'Hierarchic
 
 ## Usage
 1. Explore the successful scenarios: python3 run_dqn.py <br />
+   3 Files are generated in the 'saved_data' folder after the evaluation: <br />
+     - movement_index.pkl: the movement index (1 for directional movement and 0 for random movement) of Cpaaa at each time step. <br />
+     - cpaaa_locations.pkl: location of Cpaaa at each time step. <br />
+     - target_locations.pkl: location of the target cell (ABarpaapp) at each time step. If ABarpaapp is not born, [0,0,0] is used as a placeholder. <br />
 
 ## Citation
 add after paper submitted to biorxiv.
