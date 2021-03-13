@@ -16,11 +16,13 @@ This is accompany code and data associated with the paper submission 'Hierarchic
   ./data/Cpaaa_0: embryonic data for Cpaaa migration training and evaluation. <br />
   ./data/Cpaaa_[1-4]: embryonic data for Cpaaa test case. <br />
   ./data/mu_int_R_CANL_[1-2]: embryonic data for mu_int_R and CANL case. <br />
-  ./trained_models/:folder with all the pre-trained models <br />
+  
+  ./trained_models/:folder with all the pre-trained models. <br />
   ./trained_models/dqn_eval_net_pretrained.pkl: checkpoint of the trained lower-level DQN <br />
   ./trained_models/motion_model.pkl: checkpoint of the trained Motion Model <br />
   ./trained_models/neighbor_model_800k_train.p: checkpoint of the trained Neighbor Relationship Model <br />
-  ./Embryo.py: functions for parsing the embryo data
+  
+  ./embryo.py: functions for parsing the embryo data
   ./draw_plane.py: visualization
   ./model.py: agent-based model
   ./run.py: simulation running
