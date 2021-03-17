@@ -18,14 +18,21 @@ This is accompany code and data associated with the paper submission 'Hierarchic
   ./data/mu_int_R_CANL_[1-2]: embryonic data for mu_int_R and CANL case. <br />
   
   ./trained_models/:folder with all the pre-trained models. <br />
-  ./trained_models/dqn_eval_net_pretrained.pkl: checkpoint of the trained lower-level DQN <br />
+  ./trained_models/hdrl_llmodel.pkl: checkpoint of the trained lower-level DQN <br />
   ./trained_models/motion_model.pkl: checkpoint of the trained Motion Model <br />
-  ./trained_models/neighbor_model_800k_train.p: checkpoint of the trained Neighbor Relationship Model <br />
+  ./trained_models/neighbor_model.p: checkpoint of the trained Neighbor Relationship Model <br />
+  ./trained_models/TMM.pkl.link: the download link for the TMM <br />
   
-  ./embryo.py: functions for parsing the embryo data
-  ./draw_plane.py: visualization
-  ./model.py: agent-based model
-  ./run.py: simulation running
+  ./saved_data/: folder that used for saving the output data when exploring the successful scenarios. (see below) <br />
+  
+  ./data_description.txt: a brief description of the input textual embryonic data. <br />
+  
+  ./embryo.py: functions for parsing the embryo data <br />
+  ./draw_plane.py: visualization <br />
+  ./model.py: agent-based model <br />
+  ./model_obs_cpaaa.py: a cell migration environment that uses TMM to detect emerging features in the Cpaaa case. <br />
+  ./model_obs_mu.py: a cell migration environment that uses TMM to detect emerging features in the mu_int_R and CANL cases. <br />
+  ./run.py: simulation running <br />
 
 ## Usage
 1. Explore the successful scenarios: python3 run_dqn.py <br />
