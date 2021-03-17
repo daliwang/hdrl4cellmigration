@@ -38,10 +38,15 @@ This is accompany code and data associated with the paper submission 'Hierarchic
   (1). First download the observational data and the TMM checekpoint in the google drive: <br /> observational data: https://drive.google.com/drive/folders/1_w0p7t_dmTha8ODTgosGXZO9gMRmYd3N?usp=sharing  <br />
   TMM checkpoint: https://drive.google.com/file/d/172FC8-8074mxotD8JSZemeRcA3v57ZF6/view?usp=sharing <br />
   (2) Run the following command: <br />
-  python3 model_obs_cpaaa.py --emb n. <br />
+  python3 model_obs_cpaaa.py --emb n <br />
   n can be [1,2,3,4]. Movment index will print out after the program is done. <br />
 
-
+3. Test the movement index of 2 embryos of the mu_int_R and CANL migration: <br />
+  (1). First download the observational data  in the google drive: <br /> observational data: https://drive.google.com/drive/folders/12JOhhz9LxvNig4BgcOidWTUqjrfW08t-?usp=sharing <br />
+  (2) Run the following command: <br />
+  python3 model_obs_mu.py --cell x --emb n <br />
+  x can be [mu_int_r, canl] <br />
+  n can be [1,2]. Movment index will print out after the program is done. <br />
 
 
 
