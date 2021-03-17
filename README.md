@@ -34,6 +34,17 @@ This is accompany code and data associated with the paper submission 'Hierarchic
      - cpaaa_locations.pkl: location of Cpaaa at each time step. <br />
      - target_locations.pkl: location of the target cell (ABarpaapp) at each time step. If ABarpaapp is not born, [0,0,0] is used as a placeholder. <br />
 
+2. Test the movement index of other 4 embryos of the Cpaaa migration: <br />
+  (1). First download the observational data and the TMM checekpoint in the google drive: <br /> observational data: https://drive.google.com/drive/folders/1_w0p7t_dmTha8ODTgosGXZO9gMRmYd3N?usp=sharing  <br />
+  TMM checkpoint: https://drive.google.com/file/d/172FC8-8074mxotD8JSZemeRcA3v57ZF6/view?usp=sharing <br />
+  (2) Run the following command: <br />
+  python3 model_obs_cpaaa.py --emb n. <br />
+  n can be [1,2,3,4]. Movment index will print out after the program is done. <br />
+
+
+
+
+
 ## Citation
 add after paper submitted to biorxiv.
 
