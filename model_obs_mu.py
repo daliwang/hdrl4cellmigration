@@ -14,6 +14,7 @@ from PIL import Image, ImageDraw
 
 from draw_plane import DrawPlane
 from embryo import Embryo
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -23,39 +24,48 @@ import torch.utils.data as utils
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--emb", type=int, default=3, help="The index of Cpaaa embryo. choose from [1,2,3,4]")
+parser.add_argument("--cell", type=str, default='mu_int_r', help="The cell name. choose from [mu_int_r, canl]")
+parser.add_argument("--emb", type=int, default=1, help="The index of embryo. choose from [1,2]")
 
 args = parser.parse_args()
-if args.emb == 1:
-	START_POINT = 100
-	END_POINT = 125
-	PLANE_DRAW = 7
-	NUCLEI_DATA_PATH = './data/cpaaa_1/'
-elif args.emb == 2:
-	START_POINT = 113
-	END_POINT = 137-4
-	PLANE_DRAW = 7
-	NUCLEI_DATA_PATH = './data/cpaaa_2/'
-elif args.emb == 3:
-	START_POINT = 104
-	END_POINT = 135-7
-	PLANE_DRAW = 7
-	NUCLEI_DATA_PATH = './data/cpaaa_3/'
-elif args.emb == 4:
-	START_POINT = 100
-	END_POINT = 133-9
-	PLANE_DRAW = 7
-	NUCLEI_DATA_PATH = './data/cpaaa_4/'
+
+if args.cell == 'mu_int_r':
+	AI_CELL = 'MSppaapp'	#mu_int_R
+	if args.emb == 1:
+		START_POINT = 228+25
+		END_POINT = 228+80
+		PLANE_DRAW = 25			
+		NUCLEI_DATA_PATH = './data/mu_int_R_CANL_1/'
+	elif args.emb == 2:
+		START_POINT = 210+25
+		END_POINT = 210+80
+		PLANE_DRAW = 36		
+		NUCLEI_DATA_PATH = './data/mu_int_R_CANL_2/'
+	else:
+		print('Error. Invalid embryo!')
+		exit()
+elif args.cell == 'canl':
+	AI_CELL = 'ABalapaaapa'		#CANL
+	if args.emb == 1:
+		START_POINT = 250 + 60
+		END_POINT = 379 - 9
+		PLANE_DRAW = 11		#CANL
+		NUCLEI_DATA_PATH = './data/mu_int_R_CANL_1/'
+	elif args.emb == 2:
+		START_POINT = 236 + 60
+		END_POINT = 361 - 5
+		PLANE_DRAW = 17		#CANL
+		NUCLEI_DATA_PATH = './data/mu_int_R_CANL_2/'
+	else:
+		print('Error. Invalid embryo!')
+		exit()
 else:
-	print('Error. Invalid embryo!')
+	print('Error. Invalid cell!')
 	exit()
 
-TICK_RESOLUTION = 10
-AI_CELL = 'Cpaaa'
-
+TICK_RESOLUTION = 2
 
 PLANE_THRESHOLD = 3			#draw the cells in the [-2,+2] planes (5 total)
-
 
 INPUT_PLANE_RANGE = 2 #0
 
@@ -68,32 +78,32 @@ PLANE_RESOLUTION = 4
 
 import torch._utils
 try:
-	torch._utils._rebuild_tensor_v2
+    torch._utils._rebuild_tensor_v2
 except AttributeError:
-	def _rebuild_tensor_v2(storage, storage_offset, size, stride, requires_grad, backward_hooks):
-		tensor = torch._utils._rebuild_tensor(storage, storage_offset, size, stride)
-		tensor.requires_grad = requires_grad
-		tensor._backward_hooks = backward_hooks
-		return tensor
-	torch._utils._rebuild_tensor_v2 = _rebuild_tensor_v2
+    def _rebuild_tensor_v2(storage, storage_offset, size, stride, requires_grad, backward_hooks):
+        tensor = torch._utils._rebuild_tensor(storage, storage_offset, size, stride)
+        tensor.requires_grad = requires_grad
+        tensor._backward_hooks = backward_hooks
+        return tensor
+    torch._utils._rebuild_tensor_v2 = _rebuild_tensor_v2
 
 class Net(nn.Module):
-	def __init__(self, n_input):
-		super(Net, self).__init__()
-		self.fc1 = nn.Linear(n_input, 20480)
-		self.fc2 = nn.Linear(20480, 1024)
-		self.fc3 = nn.Linear(1024, 256)
-		self.out = nn.Linear(256, 2)
+    def __init__(self, n_input):
+        super(Net, self).__init__()
+        self.fc1 = nn.Linear(n_input, 20480)
+        self.fc2 = nn.Linear(20480, 1024)
+        self.fc3 = nn.Linear(1024, 256)
+        self.out = nn.Linear(256, 2)
 
-	def forward(self, x):
-		x = self.fc1(x)
-		x = F.relu(x)
-		x = self.fc2(x)
-		x = F.relu(x)
-		x = self.fc3(x)
-		x = F.relu(x)
-		result = self.out(x)
-		return result
+    def forward(self, x):
+        x = self.fc1(x)
+        x = F.relu(x)
+        x = self.fc2(x)
+        x = F.relu(x)
+        x = self.fc3(x)
+        x = F.relu(x)
+        result = self.out(x)
+        return result
 
 class SeqRosModel(Model):
 	def __init__(self):
@@ -110,6 +120,7 @@ class SeqRosModel(Model):
 
 		self.ai_cell = AI_CELL
 
+
 		self.start_point = START_POINT
 		self.end_point = END_POINT
 
@@ -124,10 +135,12 @@ class SeqRosModel(Model):
 		self.current_cell_list = []
 		self.dividing_cell_overall = []
 		self.next_stage_destination_list = {}
+		self.state_value_dict = {}
 		self.schedule = RandomActivation(self)
 
 		self.init_env()
 		self.update_stage_destination()
+
 
 		self.plane = DrawPlane(width=self.embryo.width,
 							height=self.embryo.height,
@@ -137,11 +150,18 @@ class SeqRosModel(Model):
 		self.canvas = self.plane.canvas
 		self.plane_draw = PLANE_DRAW
 		self.draw(self.plane_draw)
+		
+
 
 
 	def draw(self,n_plane):
 		self.canvas.delete("all")
-		draw_range = np.arange(n_plane-PLANE_THRESHOLD, n_plane+PLANE_THRESHOLD+1, 1)
+		for cell in self.schedule.agents:
+			if cell.cell_name == self.ai_cell:
+				center_plane = round(cell.location[2]/5.0)
+				n_plane = center_plane
+
+		draw_range = np.arange(center_plane-PLANE_THRESHOLD, center_plane+PLANE_THRESHOLD+1, 1)
 		draw_range = draw_range.tolist()
 		draw_range.reverse()
 
@@ -151,13 +171,24 @@ class SeqRosModel(Model):
 			for cell in self.schedule.agents:
 				if cell.cell_name == self.ai_cell:
 					type = 'AI'
+					ai_location = cell.location
+					ai_center = cell.location[0:2]
+					ai_radius = cell.diameter/2.0*np.cos(angle)
+					continue
 				else:
 					type = 'NUMB'
-				if round(cell.location[2]) == n:
+				if round(cell.location[2]/5.0) == n:
 					self.plane.draw_cell(center=cell.location[0:2],
 										radius=cell.diameter/2.0*np.cos(angle),
 										type=type,
 										level=level)
+			if round(ai_location[2]/5.0) == n:
+				self.plane.draw_cell(center=ai_center,
+									radius=ai_radius,
+									type='AI',
+									level=None)				
+
+
 		self.canvas.pack()
 		self.canvas.update()
 		time.sleep(FRESH_TIME)
@@ -280,7 +311,8 @@ class SeqRosModel(Model):
 				mother = cell.cell_name
 				daughter = self.get_cell_daughter(cell.cell_name, self.next_stage_destination_list)
 				if daughter[0] == '':
-					print('ERROR!!!!! NO DAUGHTER FOUND!!!!!')
+					self.schedule.remove(cell)
+					continue
 				cell.cell_name = daughter[0]
 				cell.diameter = self.next_stage_destination_list[daughter[0]][3]
 				cell.next_location = (self.next_stage_destination_list[daughter[0]][0:3] - cell.location) \
@@ -327,6 +359,7 @@ class SeqRosModel(Model):
 		self.current_cell_list = []
 		self.dividing_cell_overall = []
 		self.next_stage_destination_list = {}
+		self.state_value_dict = {}
 
 		del self.schedule.agents[:]
 		self.init_env()
@@ -347,10 +380,11 @@ class SeqRosModel(Model):
 			for cell in self.schedule.agents:
 				if cell.cell_name == self.ai_cell:
 					fill_color = 'red'
+
 				else:
 					fill_color = 'green'
 				cell_loc = np.array((cell.location[0], cell.location[1], \
-								cell.location[2] * self.plane_resolution))
+								cell.location[2]))
 				radius = self.get_radius(cell.cell_name)
 				z_diff = cell_loc[2] - p * self.plane_resolution
 				if abs(z_diff) < radius:
@@ -363,15 +397,18 @@ class SeqRosModel(Model):
 									cell_loc[1]+radius_projection-self.embryo.hei_offset),
 						fill = fill_color, outline ='black')
 
+
 			image = image.resize((128,128))
 			image_np = np.array(image).astype(np.float32) / 255			#widthxheightx3
 			image_np = np.rollaxis(image_np, 2)							#3x2widthxheight
+
 			if s == []:
 				s = image_np
 			else:
 				s = np.concatenate((s, image_np), axis=0)
 
 		return s
+
 
 	def step(self):
 		r = 0
@@ -390,7 +427,7 @@ class SeqRosModel(Model):
 		for cell in self.schedule.agents:
 			if cell.cell_name == self.ai_cell:
 				ai_location = np.array((cell.location[0], cell.location[1], \
-								cell.location[2] * self.plane_resolution))
+								cell.location[2]))
 
 		if self.ticks == self.end_tick:
 			done = True
@@ -408,7 +445,6 @@ class CellAgent(Agent):
 		self.min_dist_list = []
 		self.next_location = None
 
-
 	def move(self):
 		speed = np.linalg.norm(self.location[0:2] - self.next_location[0:2])
 		location_noise = np.random.normal(0, speed * 0.1, 2)
@@ -419,6 +455,7 @@ class CellAgent(Agent):
 
 	def step(self):
 		self.move()
+
 
 
 
@@ -445,8 +482,8 @@ class CNN_Net(nn.Module):
 		return actions_value
 
 
-
 if __name__ == '__main__':
+	print('Using cell '+args.cell)
 	print('Using Embryo #'+str(args.emb))
 	N_CHANNEL = 15
 	INPUT_SIZE = 128
@@ -462,7 +499,7 @@ if __name__ == '__main__':
 	else:
 		eval_net = CNN_Net()
 	eval_net.load_state_dict(torch.load('./trained_models/hdrl_llmodel.pkl', map_location=lambda storage, loc: storage))
-
+	
 	env = SeqRosModel()
 	input_buffer = []
 	movement_types = []
@@ -517,4 +554,3 @@ if __name__ == '__main__':
 			print('Movement type:', movement_types)
 			break
 		s_all = s_all_
-
