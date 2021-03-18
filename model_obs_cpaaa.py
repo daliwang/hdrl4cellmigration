@@ -23,10 +23,15 @@ import torch.utils.data as utils
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--emb", type=int, default=3, help="The index of Cpaaa embryo. choose from [1,2,3,4]")
+parser.add_argument("--emb", type=int, default=3, help="The index of Cpaaa embryo. choose from [0,1,2,3,4]")
 
 args = parser.parse_args()
-if args.emb == 1:
+if args.emb == 0:
+	START_POINT = 168
+	END_POINT = 190
+	PLANE_DRAW = 7
+	NUCLEI_DATA_PATH = './data/cpaaa_0/'	
+elif args.emb == 1:
 	START_POINT = 100
 	END_POINT = 125
 	PLANE_DRAW = 7
