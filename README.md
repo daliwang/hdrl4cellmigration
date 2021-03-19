@@ -13,6 +13,7 @@ This is accompany code and data associated with the paper submission 'Hierarchic
   
 ## File structure
   ./data/: folder with textual data of nuclei <br />
+  ./data/data_description.txt: a brief description of the input textual embryonic data. <br />
   ./data/Cpaaa_0: embryonic data for Cpaaa migration training and evaluation. <br />
   ./data/Cpaaa_[1-4]: embryonic data for Cpaaa test case. <br />
   ./data/mu_int_R_CANL_[1-2]: embryonic data for mu_int_R and CANL case. <br />
@@ -24,8 +25,6 @@ This is accompany code and data associated with the paper submission 'Hierarchic
   ./trained_models/TMM.pkl.link: the download link for the TMM <br />
   
   ./saved_data/: folder that used for saving the output data when exploring the successful scenarios. (see below) <br />
-  
-  ./data_description.txt: a brief description of the input textual embryonic data. <br />
   
   ./embryo.py: functions for parsing the embryo data <br />
   ./draw_plane.py: visualization <br />
