@@ -34,8 +34,7 @@ This is accompany code and data associated with the paper submission 'Hierarchic
   ./run.py: an HDRL Model for cell migration using the model.py environment <br />
 
 ## Usage
-1. Download embryo data into appropriate data folder (see data_description.txt)
-2. Explore the successful scenarios: python3 run.py <br />
+1.  Explore the successful scenarios: python3 run.py <br />
    3 Files are generated in the 'saved_data' folder after the evaluation: <br />
      - movement_index.pkl: the movement index (1 for directional movement and 0 for random movement) of Cpaaa at each time step. <br />
      - cpaaa_locations.pkl: location of Cpaaa at each time step. <br />
