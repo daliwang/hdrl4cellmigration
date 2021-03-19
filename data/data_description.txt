@@ -1,0 +1,17 @@
+Data organization
+The data collection contains seven sets of observational data extracted from 3D time-lapse images of seven C. elegans embryos. Every set of embryo data has a series of Comma Separated Values (CSV) text files that contain the nuclei information at each observational timepoint during embryogenesis.  
+
+Data format: AceTree text file format [1]
+Each row is a nuclei record
+Each record has the following fields: (separated by commas)
+
+Nuclei ID, validity, predecessor ID, successor 1 ID, successor 2 ID, X, Y, Z, diameter, lineage name, lineage marker 'weight', reporter intensity - Boyle Units, summed reporter intensity, voxels, placeholder for acetree name, SRI, global correction, local correction, blot correction, "crosstalk" correction, Intensity in Boyle Units = (summed intensity in nucleus) / (# of voxels in nucleus) * 1000
+
+For example: 1, 1, 24, 45, -1, 178, 57, 5.2, 1, ABalpaaaaa, 6547, 37259, 6036, 162, , 37259, 0, 0, 0, 0, 0
+
+[1] Boyle, T. J., Bao, Z., Murray, J. I., Araya, C. L., & Waterston, R. H. (2006). AceTree: a tool for visual analysis of Caenorhabditis elegans embryogenesis. BMC bioinformatics, 7, 275. https://doi.org/10.1186/1471-2105-7-275
+
+Data sources
+Cpaaa_0: embryonic data for Cpaaa migration training. The data is also available at https://tinyurl.com/ybsb37w4
+Cpaaa_[1-4]: embryonic data for Cpaaa test case is available at https://drive.google.com/drive/folders/1_w0p7t_dmTha8ODTgosGXZO9gMRmYd3N?usp=sharing 
+mu_int_R_[1-2]: embryonic data for mu_int_R case is available at https://drive.google.com/drive/folders/12JOhhz9LxvNig4BgcOidWTUqjrfW08t-?usp=sharing 
