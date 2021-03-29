@@ -15,7 +15,7 @@ This is accompany code and data associated with the paper submission 'Hierarchic
   ./data/: folder with textual data of nuclei <br />
   ./data/data_description.txt: a brief description of the input textual embryonic data. <br />
   ./data/Cpaaa_0: embryonic data for Cpaaa migration training and evaluation. <br />
-  ./data/Cpaaa_[1-4]: embryonic data for Cpaaa test case. <br />
+  ./data/Cpaaa_[1-3]: embryonic data for Cpaaa test case. <br />
   ./data/mu_int_R_CANL_[1-2]: embryonic data for mu_int_R and CANL case. <br />
   
   ./trained_models/:folder with all the pre-trained models. <br />
@@ -41,14 +41,14 @@ This is accompany code and data associated with the paper submission 'Hierarchic
      - cpaaa_locations.pkl: location of Cpaaa at each time step. <br />
      - target_locations.pkl: location of the target cell (ABarpaapp) at each time step. If ABarpaapp is not born, [0,0,0] is used as a placeholder. <br />
 
-2. Test the Cpaaa migration movement index in different embryos: <br />
+2. Test the Cpaaa migration movement index in three different embryos: <br />
   (1). Download the observational data and the TMM checekpoint in the google drive: <br /> 
   observational data: https://drive.google.com/drive/folders/1_w0p7t_dmTha8ODTgosGXZO9gMRmYd3N?usp=sharing  <br />
   TMM checkpoint: https://drive.google.com/file/d/172FC8-8074mxotD8JSZemeRcA3v57ZF6/view?usp=sharing <br />
-  (2) Command: python3 model_obs_cpaaa.py --emb [0,1,2,3] <br />
+  (2) Command: python3 model_obs_cpaaa.py --emb [1,2,3] <br />
   Movment index will print out after the program is done. The results are used for Figure 5B,5C, and 6D<br />
 
-3. Test the movement index of 2 embryos of the mu_int_R and CANL migration: <br />
+3. Test the movement index of the mu_int_R and CANL migration in two embroys: <br />
   (1). Download the observational data  in the google drive: <br /> 
   observational data: https://drive.google.com/drive/folders/12JOhhz9LxvNig4BgcOidWTUqjrfW08t-?usp=sharing <br />
   (2) Command: python3 model_obs_mu.py --cell [mu_int_r, canl] --emb [1,2] <br />
