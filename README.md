@@ -46,7 +46,7 @@ This is accompany code and data associated with the paper submission 'Hierarchic
   observational data: https://drive.google.com/drive/folders/1_w0p7t_dmTha8ODTgosGXZO9gMRmYd3N?usp=sharing  <br />
   TMM checkpoint: https://drive.google.com/file/d/172FC8-8074mxotD8JSZemeRcA3v57ZF6/view?usp=sharing <br />
   (2) Command: python3 model_obs_cpaaa.py --emb [1,2,3] <br />
-  Movment index will print out after the program is done. The results are used for Figure 5B,5C, and 6D<br />
+  Movment index will print out after the program is done. The results are used for Figure 5B,5C, and 5D<br />
 
 3. Test the movement index of the mu_int_R and CANL migration in two embroys: <br />
   (1). Download the observational data  in the google drive: <br /> 
