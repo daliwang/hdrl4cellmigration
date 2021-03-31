@@ -57,5 +57,5 @@ This is accompany code and data associated with the paper submission 'Hierarchic
 
 
 ## Citation
-add after paper submitted to biorxiv.
+Will update after paper submission.
 
