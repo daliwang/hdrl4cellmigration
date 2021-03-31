@@ -1,7 +1,7 @@
 # Hierarchical deep reinforcement learning reveals novel mechanism of cell movement
 
 ## Introduction
-This is accompany code and data associated with the paper submission 'Hierarchical deep reinforcement learning reveals novel mechanism of cell movement'. This is the accompany code and data associated with the paper submission (in bioRxiv first). And it was cloned and updated from https://github.com/zwang84/hdrl4cellmigration/
+This is accompany code and data associated with the paper submission 'Hierarchical deep reinforcement learning reveals novel mechanism of cell movement'. And it was cloned and updated from https://github.com/zwang84/hdrl4cellmigration/
 
 ## Package requirements
   Python3 (tested on 3.6.2) <br />
