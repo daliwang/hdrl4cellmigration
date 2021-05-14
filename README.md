@@ -5,7 +5,7 @@ This is accompany code and data associated with the paper submission 'Hierarchic
 
 ## Package requirements
   Python3 (tested on 3.6.2) <br />
-  PyTorch 0.2 (tested on 0.2.0_3) <br />
+  PyTorch 0.2 (tested on 0.2.0_3 (old) and 0.4.1) <br />
   Mesa (tested on 0.8.1) <br />
   PIL 4.2.1 <br />
   scikit-learn 0.19.1 <br />
