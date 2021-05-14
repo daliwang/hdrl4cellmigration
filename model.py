@@ -14,7 +14,7 @@ import io
 from PIL import Image, ImageDraw
 
 from draw_plane import DrawPlane
-from Embryo import Embryo
+from embryo import Embryo
 
 import torch
 import torch.nn as nn
@@ -56,7 +56,7 @@ RADIUS_SCALE_FACTOR = 1.0
 
 AI_CELL_SPEED_PER_MIN = 2
 
-NEIGHBOR_MODEL_PATH = './trained_models/neighbor_model.p'
+NEIGHBOR_MODEL_PATH = './trained_models/neighbor_model.pkl'
 
 NEIGHBOR_CANDIDATE_1 = [['ABarppppa', 'ABarppapp'], ['ABarpppap', 'ABarppapp'],['ABarppppa', 'ABarppapp', 'ABarpppap']]
 
@@ -610,7 +610,7 @@ class SeqRosModel(Model):
 		return offset
 
 	def step(self, a):
-		self.get_img_speed_model()
+		#self.get_img_speed_model()
 		done = False
 		sg_done = False
 		if self.ticks > 0 and self.ticks % self.tick_resolution == 0:
