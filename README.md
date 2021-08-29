@@ -5,6 +5,7 @@ This is accompany code and data associated with the paper submission 'Hierarchic
 
 ## Package requirements
   Python3 (tested on 3.6.2) <br />
+      Paszke, A., Gross, S., Massa, F., Lerer, A., Bradbury, J., Chanan, G., … Chintala, S. (2019). PyTorch: An Imperative Style, High-Performance Deep Learning Library. In Advances in Neural Information Processing Systems 32 (pp. 8024–8035). Curran Associates, Inc. Retrieved from http://papers.neurips.cc/paper/9015-pytorch-an-imperative-style-high-performance-deep-learning-library.pdf<br />
   PyTorch 0.2 (tested on 0.2.0_3 (old) and 0.4.1) <br />
   Mesa (tested on 0.8.1) <br />
   PIL 4.2.1 <br />
