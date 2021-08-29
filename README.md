@@ -4,12 +4,26 @@
 This is accompany code and data associated with the paper submission 'Hierarchical deep reinforcement learning reveals novel mechanism of cell movement'. And it was cloned and updated from https://github.com/zwang84/hdrl4cellmigration/
 
 ## Package requirements
-  Python3 (tested on 3.6.2) <br />
-  PyTorch 0.2 (tested on 0.2.0_3 (old) and 0.4.1) <br />
-  Mesa (tested on 0.8.1) <br />
-  PIL 4.2.1 <br />
-  scikit-learn 0.19.1 <br />
-  numpy (tested on 1.15.0) <br />
+
+  
+  
+Python3 (tested on 3.6.2) <br />
+PyTorch 0.2 (tested on 0.2.0_3 (old) and 0.4.1) 
+Paszke, A., Gross, S., Massa, F., Lerer, A., Bradbury, J., Chanan, G., … Chintala, S. (2019). PyTorch: An Imperative Style, High-Performance Deep Learning    Library. In Advances in Neural Information Processing Systems 32 (pp. 8024–8035). Curran Associates, Inc. Retrieved from http://papers.neurips.cc/paper/9015-pytorch-an-imperative-style-high-performance-deep-learning-library.pdf 
+https://pytorch.org/ 
+Mesa (tested on 0.8.1) <br />
+Kazil J., Masad D., Crooks A. (2020) Utilizing Python for Agent-Based Modeling: The Mesa Framework. In: Thomson R., Bisgin H., Dancy C., Hyder A., Hussain M. (eds) Social, Cultural, and Behavioral Modeling. SBP-BRiMS 2020. Lecture Notes in Computer Science, vol 12268. Springer, Cham. 
+https://mesa.readthedocs.io/ 
+PIL 4.2.1 <br />
+Umesh, P. (2012). Image Processing in Python. CSI Communications, 23. 
+https://pillow.readthedocs.io/ 
+scikit-learn 0.19.1 <br />
+Scikit-learn: Machine Learning in Python, Pedregosa et al., JMLR 12, pp. 2825-2830, 2011.
+https://scikit-learn.org/ 
+numpy (tested on 1.15.0) <br />
+Harris, C.R., Millman, K.J., van der Walt, S.J. et al. Array programming with NumPy. Nature 585, 357–362 (2020). DOI: 0.1038/s41586-020-2649-2. (Publisher link).
+https://numpy.org/ 
+  
   
 ## File structure
   ./data/: folder with textual data of nuclei <br />
