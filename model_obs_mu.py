@@ -402,7 +402,7 @@ class SeqRosModel(Model):
 			image_np = np.array(image).astype(np.float32) / 255			#widthxheightx3
 			image_np = np.rollaxis(image_np, 2)							#3x2widthxheight
 
-			if s == []:
+			if len(s) == 0:
 				s = image_np
 			else:
 				s = np.concatenate((s, image_np), axis=0)

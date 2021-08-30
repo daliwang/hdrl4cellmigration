@@ -23,7 +23,7 @@ import torch.utils.data as utils
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--emb", type=int, default=3, help="The index of Cpaaa embryo. choose from [0,1,2,3,4]")
+parser.add_argument("--emb", type=int, default=3, help="The index of Cpaaa embryo. choose from [0,1,2,3]")
 
 args = parser.parse_args()
 if args.emb == 0:
@@ -371,7 +371,7 @@ class SeqRosModel(Model):
 			image = image.resize((128,128))
 			image_np = np.array(image).astype(np.float32) / 255			#widthxheightx3
 			image_np = np.rollaxis(image_np, 2)							#3x2widthxheight
-			if s == []:
+			if len(s) == 0:
 				s = image_np
 			else:
 				s = np.concatenate((s, image_np), axis=0)
