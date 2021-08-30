@@ -73,6 +73,11 @@ STATE_CELL_LIST = ['ABarpppap', 'ABarppppa', 'ABarppppp', 'Caaaa', 'ABprapapp', 
                                 'ABprapaap', 'Cpaap', 'ABprapapa', 'ABarppapp', 'Caaap', 'Eprp', 'ABarpppaa', 'Eplp', \
                                 'ABarppapa', 'Epla', 'ABarppaap']
 
+if torch.cuda.is_available():
+    use_cuda = True
+else:
+    use_cuda = False
+
 class AlexNet(nn.Module):
 	def __init__(self, num_classes=2, num_channel=3, img_resolution=128):
 		super(AlexNet, self).__init__()
@@ -105,9 +110,12 @@ class AlexNet(nn.Module):
 
 class SeqRosModel(Model):
 	def __init__(self):
-		self.motion_model = AlexNet().cuda()
-		self.motion_model.load_state_dict(torch.load('./trained_models/motion_model.pkl'))
-		# self.motion_model.load_state_dict(torch.load('./trained_models/motion_model.pkl', map_location=lambda storage, loc: storage))
+		if use_cuda:
+			self.motion_model = AlexNet().cuda()
+			self.motion_model.load_state_dict(torch.load('./trained_models/motion_model.pkl'))
+		else:
+			self.motion_model = AlexNet()
+			self.motion_model.load_state_dict(torch.load('./trained_models/motion_model.pkl', map_location='cpu'))
 		self.file_path = './data/cpaaa_0/t%03d-nuclei'
 		self.start_point = 168
 		self.end_point = 197
@@ -507,8 +515,12 @@ class SeqRosModel(Model):
 
 		image = np.rollaxis(np.array(image), 2)
 		image = image[np.newaxis,:]
-		FloatTensor = torch.cuda.FloatTensor 
-		LongTensor = torch.cuda.LongTensor
+		if use_cuda:
+			FloatTensor = torch.cuda.FloatTensor 
+			LongTensor = torch.cuda.LongTensor
+		else:
+			FloatTensor = torch.FloatTensor 
+			LongTensor = torch.LongTensor
 		image = Variable(torch.from_numpy(image).type(FloatTensor))
 
 		pred = self.motion_model(image)
