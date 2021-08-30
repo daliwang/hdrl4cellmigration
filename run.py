@@ -175,7 +175,7 @@ for i_episode in range(len(subgoals)):
     counter = 0
     sg_counter = 0
     while True:
-        # env.render()
+        env.render()
         a = dqn.choose_action(s_all)
 
         # take action
