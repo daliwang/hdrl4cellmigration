@@ -35,14 +35,14 @@ https://numpy.org/
   ./trained_models/:folder with all the pre-trained models. <br />
   ./trained_models/hdrl_llmodel.pkl: checkpoint of the trained lower-level DQN <br />
   ./trained_models/motion_model.pkl: checkpoint of the trained Motion Model <br />
-  ./trained_models/neighbor_model.p: checkpoint of the trained Neighbor Relationship Model <br />
+  ./trained_models/neighbor_model.pkl: checkpoint of the trained Neighbor Relationship Model <br />
   ./trained_models/TMM.pkl.link: the download link for the TMM <br />
   
   ./saved_data/: folder that used for saving the output data when exploring the successful scenarios. (see below) <br />
   
   ./embryo.py: functions for parsing the embryo data <br />
   ./draw_plane.py: visualization <br />
-  ./model.py: agent-based model for cell migration using Mesa <br />
+  ./model.py: agent-based model for cell migration using Mesa. It use the neighbor_model.pkl to determine neighbor relationship <br />
   ./model_obs_cpaaa.py: a cell migration environment that uses TMM to detect emerging features in the Cpaaa case. <br />
   ./model_obs_mu.py: a cell migration environment that uses TMM to detect emerging features in the mu_int_R and CANL cases. <br />
   ./run.py: an HDRL Model for cell migration using the model.py environment <br />
