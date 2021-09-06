@@ -42,7 +42,7 @@ https://numpy.org/
   
   ./embryo.py: functions for parsing the embryo data <br />
   ./draw_plane.py: visualization <br />
-  ./model.py: agent-based model for cell migration using Mesa. It use the neighbor_model.pkl to determine neighbor relationship <br />
+  ./model.py: agent-based model for cell migration using Mesa. It uses the neighbor_model.pkl to determine neighbor relationship, and the motion_model.pkl to check the movement type <br />
   ./model_obs_cpaaa.py: a cell migration environment that uses TMM to detect emerging features in the Cpaaa case. <br />
   ./model_obs_mu.py: a cell migration environment that uses TMM to detect emerging features in the mu_int_R and CANL cases. <br />
   ./run.py: an HDRL Model for cell migration using the model.py environment <br />
